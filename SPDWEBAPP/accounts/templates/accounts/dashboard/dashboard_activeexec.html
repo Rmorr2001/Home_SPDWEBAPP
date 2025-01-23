@@ -1,0 +1,22 @@
+{% extends 'accounts/accounts_main.html' %}
+
+{% block content %}
+
+<h1> Brother Dashboard </h1>
+<!-- It would be dope to just have this check the viewers status and roll out the links labelled to them -->
+<div class = "card card-body">
+    <table class="table">
+        <tr>
+            <th>Linked Destination</th>
+        </tr>
+        {% for i in active_links%}
+            <tr> 
+                <td><a href={{i.redirect}}>{{i.dashboard_redirect_name}}</a></td>
+            </tr>
+            {% endfor %}
+    </table>
+</div>
+<div>
+    <a class="btn btn-sm btn-info" href='edit_dashboard_links/'> Update list</a>
+</div>
+{% endblock %}

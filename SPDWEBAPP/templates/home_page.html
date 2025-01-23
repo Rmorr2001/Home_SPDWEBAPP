@@ -1,0 +1,340 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraternity Landing Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --black: #000000;
+            --red: #cc0000;
+            --yellow: #ffd700;
+            --gray-light: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--gray-light);
+        }
+
+        .navbar {
+            background-color: var(--black);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--yellow);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--yellow);
+        }
+
+        .hero {
+          position: relative;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          color: white;
+          padding: 0 1rem;
+          overflow: hidden;
+      }
+
+      .hero-background {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+          background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .hero-background img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: 0;
+      }
+
+      .hero-content {
+          position: relative;
+          z-index: 2;
+      }
+
+
+        .cta-button {
+            background-color: var(--red);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #990000;
+        }
+
+        .features {
+            padding: 5rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: var(--black);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #666;
+        }
+
+        .upcoming-events {
+            background-color: var(--black);
+            color: white;
+            padding: 5rem 2rem;
+        }
+
+        .events-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .event-card {
+            background-color: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--red);
+        }
+
+        .event-date {
+            color: var(--yellow);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background-color: var(--black);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--yellow);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Set initial states for animations */
+        .hero-content h1,
+        .hero-content p,
+        .hero-content .cta-button {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="logo" href ="{% url 'login' %}">MIZ - SPD</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#brotherhood">Brotherhood</a>
+            <a href="#events">Events</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-background">
+          <img src="{% static 'images/hero-background.jpg' %}" alt="Fraternity Background">
+      </div>
+      <div class="hero-content">
+          <h1>Welcome to Our Brotherhood</h1>
+          <p>Building Leaders Since 1904</p>
+          <button class="cta-button">Join Our Legacy</button>
+      </div>
+  </section>
+
+
+    <section class="features">
+        <div class="feature-card">
+            <h3>Brotherhood</h3>
+            <p>Join a lifelong network of brothers who support and inspire each other to achieve greatness.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Leadership</h3>
+            <p>Develop essential leadership skills through hands-on experience and mentorship opportunities.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Service</h3>
+            <p>Make a positive impact in your community through our dedicated service initiatives.</p>
+        </div>
+    </section>
+
+    <section class="upcoming-events">
+        <div class="events-container">
+            <h2>Upcoming Events</h2>
+            <div class="events-grid">
+                <div class="event-card">
+                    <div class="event-date">JAN 25, 2025</div>
+                    <h3>Rush Week Kickoff</h3>
+                    <p>Join us for the start of Spring Rush Week!</p>
+                </div>
+                <div class="event-card">
+                    <div class="event-date">FEB 1, 2025</div>
+                    <h3>Alumni Networking Night</h3>
+                    <p>Connect with successful alumni in your field.</p>
+                </div>
+                <div class="event-card">
+                    <div class="event-date">FEB 15, 2025</div>
+                    <h3>Community Service Day</h3>
+                    <p>Give back to our community together.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Phi Kappa Psi. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook">📱</a>
+            <a href="#" aria-label="Instagram">📸</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+        </div>
+    </footer>
+
+    <script>
+        // Register ScrollTrigger plugin
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Wait for DOM content to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create a timeline for hero animations
+            const heroTimeline = gsap.timeline({defaults: {ease: "power3.out"}});
+
+            // Add animations to the timeline
+            heroTimeline
+                .to(".hero-content h1", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1
+                })
+                .to(".hero-content p", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1
+                }, "-=0.5")
+                .to(".hero-content .cta-button", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1
+                }, "-=0.5");
+
+            // Feature cards animation
+            gsap.utils.toArray('.feature-card').forEach((card, i) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    },
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.8,
+                    delay: i * 0.2
+                });
+            });
+        });
+    </script>
+</body>
+</html>

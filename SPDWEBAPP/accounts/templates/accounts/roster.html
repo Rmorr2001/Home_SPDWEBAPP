@@ -1,0 +1,36 @@
+{% extends 'accounts/accounts_main.html' %}
+
+{% block content %}
+
+<h1> Roster </h1>
+<div class = "card card-body">
+    <table class="table">
+        <tr>
+            <th>N. Memb Count</th>
+            <th>Active Count</th>
+            <th>Alumni Count</th>
+        </tr>
+            <tr>
+                <td> {{newmember_brother_count}}</td>
+                <td> {{active_brother_count}} </td>
+                <td> {{alumni_brother_count}}</td>
+            </tr>
+
+    <table class="table">
+        <tr>
+            <th>Brother Name</th>
+            <th>Brother Status</th>
+            <th>Brother Email</th>
+        </tr>
+        {% for i in list_of_brothers%}
+            <tr>
+                <td> {{i.brother_name}} </td>
+                <td> {{i.membership_status}} </td>
+                <td> {{i.email}} </td>
+                <td><a href="">Update</a></td>
+                <td><a href="">Delete</a></td>
+            </tr>
+            {% endfor %}
+    </table>
+</div>
+{% endblock %}
